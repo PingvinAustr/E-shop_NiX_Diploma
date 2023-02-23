@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Host", "Catalog.Host\Catalog.Host.csproj", "{EE6ED442-179A-4235-BDF7-FD245EA5F17C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{8768D446-6A34-4527-BE47-194C6744E064}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE6ED442-179A-4235-BDF7-FD245EA5F17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE6ED442-179A-4235-BDF7-FD245EA5F17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE6ED442-179A-4235-BDF7-FD245EA5F17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE6ED442-179A-4235-BDF7-FD245EA5F17C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EE6ED442-179A-4235-BDF7-FD245EA5F17C} = {8768D446-6A34-4527-BE47-194C6744E064}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3747CCF-1C32-4FDE-9CD7-52CC33E24CB2}
+	EndGlobalSection
+EndGlobal
