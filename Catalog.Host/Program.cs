@@ -5,11 +5,17 @@ using Catalog.Host.Repositories.Interfaces;
 using Catalog.Host.Services;
 using Catalog.Host.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation.AspNetCore;
+using Catalog.Host.Models.Requests;
 
 var configuration = GetConfiguration();
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(options =>
+{
+    options.RegisterValidatorsFromAssemblyContaining<CreateCarRequest>();
+});
+
 builder.Services.Configure<CatalogConfig>(configuration);
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program));
