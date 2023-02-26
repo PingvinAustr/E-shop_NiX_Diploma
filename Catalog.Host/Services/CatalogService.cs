@@ -51,5 +51,59 @@ namespace Catalog.Host.Services
                 };
             });
         }
+
+        public async Task<PaginatedItemsResponse<TypeDto>> GetTypes()
+        {
+            return await ExecuteSafeAsync(async () =>
+            {
+                var result = await _catalogItemRepository.GetTypes();
+                return new PaginatedItemsResponse<TypeDto>()
+                {
+                    Count = result.TotalCount,
+                    Data = result.Data.Select(s => _mapper.Map<TypeDto>(s)).ToList(),
+                };
+            });
+        }
+
+        public async Task<PaginatedItemsResponse<CarDto>> GetById(int id)
+        {
+            return await ExecuteSafeAsync(async () =>
+            {
+                var result = await _catalogItemRepository.GetById(id);
+                return new PaginatedItemsResponse<CarDto>()
+                {
+                    Count = result.TotalCount,
+                    Data = result.Data.Select(s => _mapper.Map<CarDto>(s)).ToList(),
+                    PageIndex = 0,
+                    PageSize = 0
+                };
+            });
+        }
+
+        public async Task<PaginatedItemsResponse<CarDto>> GetByBrand(int brandId)
+        {
+            return await ExecuteSafeAsync(async () =>
+            {
+                var result = await _catalogItemRepository.GetByBrand(brandId);
+                return new PaginatedItemsResponse<CarDto>()
+                {
+                    Count = result.TotalCount,
+                    Data = result.Data.Select(s => _mapper.Map<CarDto>(s)).ToList(),
+                };
+            });
+        }
+
+        public async Task<PaginatedItemsResponse<CarDto>> GetByType(int typeId)
+        {
+            return await ExecuteSafeAsync(async () =>
+            {
+                var result = await _catalogItemRepository.GetByType(typeId);
+                return new PaginatedItemsResponse<CarDto>()
+                {
+                    Count = result.TotalCount,
+                    Data = result.Data.Select(s => _mapper.Map<CarDto>(s)).ToList()
+                };
+            });
+        }
     }
 }
