@@ -15,7 +15,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddTransient<ICarRepository, CarRepository>();
+builder.Services.AddTransient<ITypeRepository, TypeRepository>();
+builder.Services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
+builder.Services.AddTransient<IManufacturerService, ManufacturerService>();
 builder.Services.AddTransient<ICatalogService, CatalogService>();
+builder.Services.AddTransient<ITypeService, TypeService>();
 builder.Services.AddTransient<ICarService, CarService>();
 
 builder.Services.AddDbContextFactory<AppDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
