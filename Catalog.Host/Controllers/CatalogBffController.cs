@@ -44,4 +44,56 @@ public class CatalogBffController : ControllerBase
 
         return Ok(items);
     }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(PaginatedItemsResponse<TypeDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetTypes()
+    {
+        var items = await _catalogService.GetTypes();
+        if (items == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(items);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(CarDto), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var item = await _catalogService.GetById(id);
+        if (item == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(item);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(PaginatedItemsResponse<CarDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetByBrand(int brandId)
+    {
+        var items = await _catalogService.GetByBrand(brandId);
+        if (items == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(items);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(PaginatedItemsResponse<Car>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetByType(int typeId)
+    {
+        var items = await _catalogService.GetByType(typeId);
+        if (items == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(items);
+    }
 }

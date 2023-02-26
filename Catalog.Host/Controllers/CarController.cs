@@ -4,6 +4,7 @@ using Catalog.Host.Models.Responses;
 using Catalog.Host.Services.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Catalog.Host.Models.Dtos;
 
 namespace Catalog.Host.Controllers;
 
@@ -28,5 +29,19 @@ public class CarController : ControllerBase
     {
         var result = await _catalogItemService.Add(request.CarName, request.CarPromo, request.Price, request.IsAvailable, request.ManufacturerId, request.CarTypeId, request.ImageFileName);
         return Ok(new AddCarResponse<int?>() { Id = result });
+    }
+
+    [HttpDelete]
+    public IActionResult Delete(int itemId)
+    {
+        var result = _catalogItemService.Delete(itemId);
+        return Ok();
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> Put(CarDto item, int itemToUpdate)
+    {
+        var result = await _catalogItemService.Put(item, itemToUpdate);
+        return Ok();
     }
 }
