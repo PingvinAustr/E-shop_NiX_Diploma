@@ -57,5 +57,66 @@ namespace Catalog.Host.Repositories
             var items = await _dbContext.Manufacturers.ToListAsync();
             return new PaginatedItems<Manufacturer>() { Data = items, TotalCount = items.Count };
         }
+
+        public async Task<PaginatedItems<Data.Entities.Type>> GetTypes()
+        {
+            var items = await _dbContext.Types.ToListAsync();
+            return new PaginatedItems<Data.Entities.Type>() { Data = items, TotalCount = items.Count };
+        }
+
+        public async Task<PaginatedItems<Car>> GetById(int id)
+        {
+            var item = await _dbContext.Cars.Where(x => x.CarId == id).Include(x => x.Manufacturer).Include(x => x.CarType).ToListAsync();
+            return new PaginatedItems<Car>() { TotalCount = 1, Data = item };
+        }
+
+        public async Task<PaginatedItems<Car>> GetByBrand(int brand)
+        {
+            var items = await _dbContext.Cars.Where(x => x.Manufacturer.ManufacturerId == brand).Include(x => x.Manufacturer).Include(x => x.CarType).ToListAsync();
+            return new PaginatedItems<Car>() { TotalCount = items.Count, Data = items };
+        }
+
+        public async Task<PaginatedItems<Car>> GetByType(int typeId)
+        {
+            var items = await _dbContext.Cars.Where(x => x.CarType.TypeId == typeId).Include(x => x.CarType).Include(x => x.Manufacturer).ToListAsync();
+            return new PaginatedItems<Car>() { Data = items, TotalCount = items.Count };
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                foreach (var item in _dbContext.Cars.ToList())
+                {
+                    if (item.CarId == id)
+                    {
+                        _dbContext.Cars.Remove(item);
+                    }
+                }
+
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<int?> Put(Car item, int id)
+        {
+            _dbContext.Cars.Where(x => x.CarId == id).ToList().ForEach(x =>
+            {
+                x.CarName = item.CarName;
+                x.CarPromo = item.CarPromo;
+                x.Price = item.Price;
+                x.CarType = item.CarType;
+                x.Manufacturer = item.Manufacturer;
+                x.IsAvailable = item.IsAvailable;
+                x.ImageFileName = item.ImageFileName;
+            });
+            await _dbContext.SaveChangesAsync();
+            return id;
+        }
     }
 }
