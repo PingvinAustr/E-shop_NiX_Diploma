@@ -62,6 +62,11 @@ public class CatalogBffController : ControllerBase
     [ProducesResponseType(typeof(CarDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetById(int id)
     {
+        if (id < 0)
+        {
+            return BadRequest("Id cannot be <0");
+        }
+
         var item = await _catalogService.GetById(id);
         if (item == null)
         {
@@ -75,6 +80,11 @@ public class CatalogBffController : ControllerBase
     [ProducesResponseType(typeof(PaginatedItemsResponse<CarDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetByBrand(int brandId)
     {
+        if (brandId < 0)
+        {
+            return BadRequest("Id cannot be <0");
+        }
+
         var items = await _catalogService.GetByBrand(brandId);
         if (items == null)
         {
@@ -88,6 +98,11 @@ public class CatalogBffController : ControllerBase
     [ProducesResponseType(typeof(PaginatedItemsResponse<Car>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetByType(int typeId)
     {
+        if (typeId < 0)
+        {
+            return BadRequest("Id cannot be <0");
+        }
+
         var items = await _catalogService.GetByType(typeId);
         if (items == null)
         {
