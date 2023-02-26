@@ -34,11 +34,11 @@ namespace Catalog.Host.Data
         {
             return new List<Manufacturer>()
         {
-            new Manufacturer() { ManufacturerName = "Mercedes-Benz", ManufacturerCountry = "Germany" },
-            new Manufacturer() { ManufacturerName = "BWM", ManufacturerCountry = "Germany" },
-            new Manufacturer() { ManufacturerName = "Ford", ManufacturerCountry = "USA" },
-            new Manufacturer() { ManufacturerName = "Lexus", ManufacturerCountry = "Japan" },
-            new Manufacturer() { ManufacturerName = "Avtozaz", ManufacturerCountry = "Ukraine" }
+            new Manufacturer() { ManufacturerId = 1, ManufacturerName = "Mercedes-Benz", ManufacturerCountry = "Germany" },
+            new Manufacturer() { ManufacturerId = 2, ManufacturerName = "BWM", ManufacturerCountry = "Germany" },
+            new Manufacturer() { ManufacturerId = 3, ManufacturerName = "Ford", ManufacturerCountry = "USA" },
+            new Manufacturer() { ManufacturerId = 4, ManufacturerName = "Lexus", ManufacturerCountry = "Japan" },
+            new Manufacturer() { ManufacturerId = 5, ManufacturerName = "Avtozaz", ManufacturerCountry = "Ukraine" }
         };
         }
 
@@ -63,7 +63,7 @@ namespace Catalog.Host.Data
             new Car() { CarName = "Mercedes C-class", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 1, TypeId = 4, Price = 100000 },
             new Car() { CarName = "BMW X1 sDrive18i", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 2, TypeId = 4, Price = 35000 },
             new Car() { CarName = "BMW X7 M50d", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 2, TypeId = 1, Price = 125000 },
-            new Car() { CarName = "BMW X7 xDrive30d", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 1, TypeId = 1, Price = 75000 },
+            new Car() { CarName = "BMW X7 xDrive30d", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 2, TypeId = 1, Price = 75000 },
             new Car() { CarName = "Ford GT Mk II ", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 3, TypeId = 2, Price = 300000 },
             new Car() { CarName = "Ford Mustang 1967", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 3, TypeId = 3, Price = 50000 },
             new Car() { CarName = "Zaporozhets", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 5, TypeId = 3, Price = 102000 },
