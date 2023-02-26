@@ -10,9 +10,10 @@ namespace Catalog.Host.Mapping
         {
             CreateMap<Car, CarDto>()
                 .ForMember("ImageFileName", opt
-                    => opt.MapFrom<CarPictureResolver, string>(c => c.ImageFileName));
-            CreateMap<Manufacturer, ManufacturerDto>();
-            CreateMap<Data.Entities.Type, TypeDto>();
+                    => opt.MapFrom<CarPictureResolver, string>(c => c.ImageFileName))
+                .ReverseMap();
+            CreateMap<Manufacturer, ManufacturerDto>().ReverseMap();
+            CreateMap<Data.Entities.Type, TypeDto>().ReverseMap();
         }
     }
 }
