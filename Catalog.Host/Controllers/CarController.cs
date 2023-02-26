@@ -30,11 +30,22 @@ public class CarController : ControllerBase
     {
         if (!ModelState.IsValid)
         {
+            _logger.LogError($"[LOG][{DateTime.Now}] CarController.Add - Failed to add car {request.CarName} - bad request");
             return BadRequest(ModelState);
         }
 
-        var result = await _catalogItemService.Add(request.CarName, request.CarPromo, request.Price, request.IsAvailable, request.ManufacturerId, request.CarTypeId, request.ImageFileName);
-        return Ok(new AddCarResponse<int?>() { Id = result });
+        _logger.LogInformation($"[LOG][{DateTime.Now}] CarController.Add - Adding car {request.CarName}");
+        try
+        {
+            var result = await _catalogItemService.Add(request.CarName, request.CarPromo, request.Price, request.IsAvailable, request.ManufacturerId, request.CarTypeId, request.ImageFileName);
+            _logger.LogInformation($"[LOG][{DateTime.Now}] CarController.Add - Added car {request.CarName}");
+            return Ok(new AddCarResponse<int?>() { Id = result });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"[LOG][{DateTime.Now}] CarController.Add - Failed to add car: {request.CarName} due to exception - {ex.Message}. Stack trace - {ex.StackTrace}");
+            return BadRequest(ex);
+        }
     }
 
     [HttpDelete]
@@ -42,11 +53,22 @@ public class CarController : ControllerBase
     {
         if (itemId < 0)
         {
+            _logger.LogError($"[LOG][{DateTime.Now}] CarController.Delete - Failed to delete car with ID:{itemId} - bad request");
             return BadRequest("Id cannot be <0");
         }
 
-        var result = _catalogItemService.Delete(itemId);
-        return Ok();
+        _logger.LogInformation($"[LOG][{DateTime.Now}] CarController.Delete - Deleting car with ID:{itemId}");
+        try
+        {
+            var result = _catalogItemService.Delete(itemId);
+            _logger.LogInformation($"[LOG][{DateTime.Now}] CarController.Delete - Deleted car with ID:{itemId}");
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"[LOG][{DateTime.Now}] CarController.Delete - Failed to delete car with ID: {itemId} due to exception - {ex.Message}. Stack trace - {ex.StackTrace}");
+            return BadRequest(ex);
+        }
     }
 
     [HttpPut]
@@ -55,10 +77,21 @@ public class CarController : ControllerBase
         var validationResult = await new CarDtoValidator().ValidateAsync(item);
         if (!validationResult.IsValid)
         {
+            _logger.LogError($"[LOG][{DateTime.Now}] CarController.Put - Failed to edit(PUT) car with ID:{item.CarId} - model validation error - {validationResult.Errors}");
             return BadRequest(validationResult.Errors);
         }
 
-        var result = await _catalogItemService.Put(item, itemToUpdate);
-        return Ok();
+        _logger.LogInformation($"[LOG][{DateTime.Now}] CarController.Put - Trying to update car with ID:{item.CarId}");
+        try
+        {
+            var result = await _catalogItemService.Put(item, itemToUpdate);
+            _logger.LogInformation($"[LOG][{DateTime.Now}] CarController.Put - Updated car with ID:{item.CarId}");
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"[LOG][{DateTime.Now}] CarController.Put - Failed to delete car with ID: {item.CarId} due to exception - {ex.Message}. Stack trace - {ex.StackTrace}");
+            return BadRequest(ex);
+        }
     }
 }
