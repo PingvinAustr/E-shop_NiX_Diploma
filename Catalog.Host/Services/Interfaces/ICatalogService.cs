@@ -7,5 +7,9 @@ namespace Catalog.Host.Services.Interfaces
     {
         Task<PaginatedItemsResponse<CarDto>> GetCatalogItemsAsync(int pageSize, int pageIndex);
         Task<PaginatedItemsResponse<ManufacturerDto>> GetBrands();
+        Task<PaginatedItemsResponse<TypeDto>> GetTypes();
+        Task<PaginatedItemsResponse<CarDto>> GetById(int id);
+        Task<PaginatedItemsResponse<CarDto>> GetByBrand(int brandId);
+        Task<PaginatedItemsResponse<CarDto>> GetByType(int typeId);
     }
 }
