@@ -25,23 +25,6 @@ namespace Catalog.Host.Services
             _mapper = mapper;
         }
 
-        /*
-        public async Task<PaginatedItemsResponse<CarDto>> GetCatalogItemsAsync(int pageSize, int pageIndex)
-        {
-            return await ExecuteSafeAsync(async () =>
-            {
-                var result = await _catalogItemRepository.GetByPageAsync(pageIndex, pageSize);
-                return new PaginatedItemsResponse<CarDto>()
-                {
-                    Count = result.TotalCount,
-                    Data = result.Data.Select(s => _mapper.Map<CarDto>(s)).ToList(),
-                    PageIndex = pageIndex,
-                    PageSize = pageSize
-                };
-            });
-        }
-        */
-
         public async Task<PaginatedItemsResponse<CarDto>?> GetCatalogItemsAsync(int pageSize, int pageIndex, Dictionary<CatalogTypeFilter, int>? filters)
         {
             return await ExecuteSafeAsync(async () =>
@@ -78,11 +61,11 @@ namespace Catalog.Host.Services
             });
         }
 
-        public async Task<PaginatedItemsResponse<ManufacturerDto>> GetBrands()
+        public async Task<PaginatedItemsResponse<ManufacturerDto>> GetManufacturers()
         {
             return await ExecuteSafeAsync(async () =>
             {
-                var result = await _catalogItemRepository.GetBrands();
+                var result = await _catalogItemRepository.GetManufacturers();
                 return new PaginatedItemsResponse<ManufacturerDto>()
                 {
                     Count = result.TotalCount,

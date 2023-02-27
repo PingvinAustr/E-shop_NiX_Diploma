@@ -40,7 +40,7 @@ public class CatalogBffController : ControllerBase
     public async Task<IActionResult> GetManufacturers()
     {
         _logger.LogInformation($"[LOG][{DateTime.Now}] CatalogBffContoller.GetManufacturers - getting all manufacturers");
-        var items = await _catalogService.GetBrands();
+        var items = await _catalogService.GetManufacturers();
         if (items == null)
         {
             _logger.LogError($"[LOG][{DateTime.Now}] CatalogBffContoller.GetManufacturers - not found");

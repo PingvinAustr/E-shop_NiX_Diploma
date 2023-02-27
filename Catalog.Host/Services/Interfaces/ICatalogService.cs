@@ -7,7 +7,7 @@ namespace Catalog.Host.Services.Interfaces
     public interface ICatalogService
     {
         Task<PaginatedItemsResponse<CarDto>?> GetCatalogItemsAsync(int pageSize, int pageIndex, Dictionary<CatalogTypeFilter, int>? filters);
-        Task<PaginatedItemsResponse<ManufacturerDto>> GetBrands();
+        Task<PaginatedItemsResponse<ManufacturerDto>> GetManufacturers();
         Task<PaginatedItemsResponse<TypeDto>> GetTypes();
         Task<PaginatedItemsResponse<CarDto>> GetById(int id);
         Task<PaginatedItemsResponse<CarDto>> GetByBrand(int brandId);
