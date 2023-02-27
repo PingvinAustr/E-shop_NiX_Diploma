@@ -19,6 +19,7 @@ namespace Catalog.Host.Repositories
             _logger = logger;
         }
 
+        /*
         public async Task<PaginatedItems<Car>> GetByPageAsync(int pageIndex, int pageSize)
         {
             var totalItems = await _dbContext.Cars
@@ -31,6 +32,33 @@ namespace Catalog.Host.Repositories
                 .Skip(pageSize * pageIndex)
                 .Take(pageSize)
                 .ToListAsync();
+
+            return new PaginatedItems<Car>() { TotalCount = totalItems, Data = itemsOnPage };
+        }
+        */
+
+        public async Task<PaginatedItems<Car>> GetByPageAsync(int pageIndex, int pageSize, int? brandFilter, int? typeFilter)
+        {
+            IQueryable<Car> query = _dbContext.Cars;
+
+            if (brandFilter.HasValue)
+            {
+                query = query.Where(w => w.ManufacturerId == brandFilter.Value);
+            }
+
+            if (typeFilter.HasValue)
+            {
+                query = query.Where(w => w.TypeId == typeFilter.Value);
+            }
+
+            var totalItems = await query.LongCountAsync();
+
+            var itemsOnPage = await query.OrderBy(c => c.Manufacturer.ManufacturerName)
+               .Include(i => i.Manufacturer)
+               .Include(i => i.CarType)
+               .Skip(pageSize * pageIndex)
+               .Take(pageSize)
+               .ToListAsync();
 
             return new PaginatedItems<Car>() { TotalCount = totalItems, Data = itemsOnPage };
         }
