@@ -1,0 +1,18 @@
+﻿@model CatalogItem
+
+
+<form>
+    @{
+        var address = Model.ImageFileName + ".png";
+        // address = "http://www.alevelwebsite.com:5001/assets/images/6.png";
+    }
+    <img class="esh-catalog-thumbnail" src="@address" />
+    <div class="esh-catalog-name">
+        <span>@Model.CarName</span>
+        <span>@Model.CarPromo</span>
+    </div>
+    <div class="esh-catalog-price">
+        <span>@Model.Price.ToString("N2")</span>
+    </div>
+    <input type="hidden" asp-for="@Model.Id" name="id" />
+</form>

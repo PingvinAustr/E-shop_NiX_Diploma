@@ -1,11 +1,12 @@
 ﻿using Catalog.Host.Models.Dtos;
+using Catalog.Host.Models.Enums;
 using Catalog.Host.Models.Responses;
 
 namespace Catalog.Host.Services.Interfaces
 {
     public interface ICatalogService
     {
-        Task<PaginatedItemsResponse<CarDto>> GetCatalogItemsAsync(int pageSize, int pageIndex);
+        Task<PaginatedItemsResponse<CarDto>?> GetCatalogItemsAsync(int pageSize, int pageIndex, Dictionary<CatalogTypeFilter, int>? filters);
         Task<PaginatedItemsResponse<ManufacturerDto>> GetBrands();
         Task<PaginatedItemsResponse<TypeDto>> GetTypes();
         Task<PaginatedItemsResponse<CarDto>> GetById(int id);

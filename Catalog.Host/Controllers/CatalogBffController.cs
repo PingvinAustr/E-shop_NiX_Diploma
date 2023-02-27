@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Catalog.Host.Data.Entities;
 using Catalog.Host.Models.Dtos;
+using Catalog.Host.Models.Enums;
 using Catalog.Host.Models.Requests;
 using Catalog.Host.Models.Responses;
 using Catalog.Host.Services.Interfaces;
@@ -26,10 +27,10 @@ public class CatalogBffController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType(typeof(PaginatedItemsResponse<CarDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Items(PaginatedItemsRequest request)
+    public async Task<IActionResult> Items(PaginatedItemsRequest<CatalogTypeFilter> request)
     {
         _logger.LogInformation($"[LOG][{DateTime.Now}] CatalogBffController.Items - getting all items. PageSize:{request.PageSize}, PageIndex:{request.PageIndex}");
-        var result = await _catalogService.GetCatalogItemsAsync(request.PageSize, request.PageIndex);
+        var result = await _catalogService.GetCatalogItemsAsync(request.PageSize, request.PageIndex, request.Filters);
         _logger.LogInformation($"[LOG][{DateTime.Now}] CatalogBffController.Items - got {result.Count} items");
         return Ok(result);
     }

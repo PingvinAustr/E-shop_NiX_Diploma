@@ -57,17 +57,17 @@ namespace Catalog.Host.Data
         {
             return new List<Car>()
         {
-            new Car() { CarName = "Mercedes-AMG GmbH GT", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 1, TypeId = 1, Price = 102000 },
-            new Car() { CarName = "Mercedes S-class", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 1, TypeId = 1, Price = 100000 },
-            new Car() { CarName = "Mercedes A-class", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 1, TypeId = 4, Price = 100000 },
-            new Car() { CarName = "Mercedes C-class", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 1, TypeId = 4, Price = 100000 },
-            new Car() { CarName = "BMW X1 sDrive18i", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 2, TypeId = 4, Price = 35000 },
-            new Car() { CarName = "BMW X7 M50d", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 2, TypeId = 1, Price = 125000 },
-            new Car() { CarName = "BMW X7 xDrive30d", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 2, TypeId = 1, Price = 75000 },
-            new Car() { CarName = "Ford GT Mk II ", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 3, TypeId = 2, Price = 300000 },
-            new Car() { CarName = "Ford Mustang 1967", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 3, TypeId = 3, Price = 50000 },
-            new Car() { CarName = "Zaporozhets", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 5, TypeId = 3, Price = 102000 },
-            new Car() { CarName = "LEXUS ES300H", CarPromo = "Promo", ImageFileName = "Image", IsAvailable = true, ManufacturerId = 4, TypeId = 4, Price = 55000 },
+            new Car() { CarName = "Mercedes-AMG GmbH GT", CarPromo = "Promo", ImageFileName = "1", IsAvailable = true, ManufacturerId = 1, TypeId = 1, Price = 102000 },
+            new Car() { CarName = "Mercedes S-class", CarPromo = "Promo", ImageFileName = "2", IsAvailable = true, ManufacturerId = 1, TypeId = 1, Price = 100000 },
+            new Car() { CarName = "Mercedes A-class", CarPromo = "Promo", ImageFileName = "3", IsAvailable = true, ManufacturerId = 1, TypeId = 4, Price = 100000 },
+            new Car() { CarName = "Mercedes C-class", CarPromo = "Promo", ImageFileName = "4", IsAvailable = true, ManufacturerId = 1, TypeId = 4, Price = 100000 },
+            new Car() { CarName = "BMW X1 sDrive18i", CarPromo = "Promo", ImageFileName = "5", IsAvailable = true, ManufacturerId = 2, TypeId = 4, Price = 35000 },
+            new Car() { CarName = "BMW X7 M50d", CarPromo = "Promo", ImageFileName = "6", IsAvailable = true, ManufacturerId = 2, TypeId = 1, Price = 125000 },
+            new Car() { CarName = "BMW X7 xDrive30d", CarPromo = "Promo", ImageFileName = "7", IsAvailable = true, ManufacturerId = 2, TypeId = 1, Price = 75000 },
+            new Car() { CarName = "Ford GT Mk II ", CarPromo = "Promo", ImageFileName = "8", IsAvailable = true, ManufacturerId = 3, TypeId = 2, Price = 300000 },
+            new Car() { CarName = "Ford Mustang 1967", CarPromo = "Promo", ImageFileName = "9", IsAvailable = true, ManufacturerId = 3, TypeId = 3, Price = 50000 },
+            new Car() { CarName = "Zaporozhets", CarPromo = "Promo", ImageFileName = "10", IsAvailable = true, ManufacturerId = 5, TypeId = 3, Price = 102000 },
+            new Car() { CarName = "LEXUS ES300H", CarPromo = "Promo", ImageFileName = "11", IsAvailable = true, ManufacturerId = 4, TypeId = 4, Price = 55000 },
         };
         }
     }
