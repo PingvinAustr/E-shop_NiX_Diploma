@@ -19,24 +19,6 @@ namespace Catalog.Host.Repositories
             _logger = logger;
         }
 
-        /*
-        public async Task<PaginatedItems<Car>> GetByPageAsync(int pageIndex, int pageSize)
-        {
-            var totalItems = await _dbContext.Cars
-                .LongCountAsync();
-
-            var itemsOnPage = await _dbContext.Cars
-                .Include(i => i.Manufacturer)
-                .Include(i => i.CarType)
-                .OrderBy(c => c.CarName)
-                .Skip(pageSize * pageIndex)
-                .Take(pageSize)
-                .ToListAsync();
-
-            return new PaginatedItems<Car>() { TotalCount = totalItems, Data = itemsOnPage };
-        }
-        */
-
         public async Task<PaginatedItems<Car>> GetByPageAsync(int pageIndex, int pageSize, int? brandFilter, int? typeFilter)
         {
             IQueryable<Car> query = _dbContext.Cars;
@@ -80,7 +62,7 @@ namespace Catalog.Host.Repositories
             return item.Entity.CarId;
         }
 
-        public async Task<PaginatedItems<Manufacturer>> GetBrands()
+        public async Task<PaginatedItems<Manufacturer>> GetManufacturers()
         {
             var items = await _dbContext.Manufacturers.ToListAsync();
             return new PaginatedItems<Manufacturer>() { Data = items, TotalCount = items.Count };
