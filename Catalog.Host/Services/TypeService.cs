@@ -14,7 +14,7 @@ public class TypeService : BaseDataService<AppDbContext>, ITypeService
     private readonly IMapper _mapper;
 
     public TypeService(
-        IDbContextWrapper<AppDbContext> dbContextWrapper,
+        Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext> dbContextWrapper,
         ILogger<BaseDataService<AppDbContext>> logger,
         ITypeRepository catalogTypeRepository,
         IMapper mapper)

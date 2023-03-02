@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Catalog.Host.Services
 {
-    public class DbContextWrapper<T> : IDbContextWrapper<T>
+    public class DbContextWrapper<T> : Infrastructure.Services.Interfaces.IDbContextWrapper<T>
      where T : DbContext
     {
         private readonly T _dbContext;

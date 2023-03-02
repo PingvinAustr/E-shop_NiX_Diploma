@@ -6,6 +6,8 @@ using Catalog.Host.Models.Validators;
 using Catalog.Host.Services.Interfaces;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Catalog.Host.Controllers;
 

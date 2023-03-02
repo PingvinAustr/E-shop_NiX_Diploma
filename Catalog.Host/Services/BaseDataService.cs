@@ -6,11 +6,11 @@ namespace Catalog.Host.Services;
 public abstract class BaseDataService<T>
     where T : DbContext
 {
-    private readonly IDbContextWrapper<T> _dbContextWrapper;
+    private readonly Infrastructure.Services.Interfaces.IDbContextWrapper<T> _dbContextWrapper;
     private readonly ILogger<BaseDataService<T>> _logger;
 
     protected BaseDataService(
-        IDbContextWrapper<T> dbContextWrapper,
+        Infrastructure.Services.Interfaces.IDbContextWrapper<T> dbContextWrapper,
         ILogger<BaseDataService<T>> logger)
     {
         _dbContextWrapper = dbContextWrapper;
