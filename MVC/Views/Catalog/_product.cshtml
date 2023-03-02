@@ -3,10 +3,10 @@
 
 <form>
     @{
-        var address = Model.ImageFileName + ".png";
+        var address = Model.ImageFileName + ".jpg";
         // address = "http://www.alevelwebsite.com:5001/assets/images/6.png";
     }
-    <img class="esh-catalog-thumbnail" src="@address" />
+    <img style="width:350px; height:234px;" class="esh-catalog-thumbnail" src="@address" />
     <div class="esh-catalog-name">
         <span>@Model.CarName</span>
         <span>@Model.CarPromo</span>

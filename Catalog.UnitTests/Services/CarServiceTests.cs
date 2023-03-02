@@ -9,7 +9,7 @@ public class CarServiceTests
     private readonly ICarService _carService;
 
     private readonly Mock<ICarRepository> _carRepository;
-    private readonly Mock<Host.Services.Interfaces.IDbContextWrapper<AppDbContext>> _dbContextWrapper;
+    private readonly Mock<Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext>> _dbContextWrapper;
     private readonly Mock<ILogger<CatalogService>> _logger;
     private readonly Mock<IMapper> _mapper;
 
@@ -35,7 +35,7 @@ public class CarServiceTests
     public CarServiceTests()
     {
         _carRepository = new Mock<ICarRepository>();
-        _dbContextWrapper = new Mock<Host.Services.Interfaces.IDbContextWrapper<AppDbContext>>();
+        _dbContextWrapper = new Mock<Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext>>();
         _logger = new Mock<ILogger<CatalogService>>();
         _mapper = new Mock<IMapper>();
 

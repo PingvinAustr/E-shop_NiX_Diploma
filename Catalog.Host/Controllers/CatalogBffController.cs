@@ -49,7 +49,7 @@ public class CatalogBffController : ControllerBase
     [ProducesResponseType(typeof(PaginatedItemsResponse<ManufacturerDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetManufacturers()
     {
-        _logger.LogInformation($"ABOBAABOBAABOBAABOBAABOBAUser Id {User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value}");
+        _logger.LogInformation($"User Id {User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value}");
         _logger.LogInformation($"[LOG][{DateTime.Now}] CatalogBffContoller.GetManufacturers - getting all manufacturers");
         var items = await _catalogService.GetManufacturers();
         if (items == null)

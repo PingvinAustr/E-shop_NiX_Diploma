@@ -10,14 +10,14 @@ namespace Catalog.UnitTests.Services
         private readonly ManufacturerService _manufacturerService;
 
         private readonly Mock<IManufacturerRepository> _manufacturerRepository;
-        private readonly Mock<Host.Services.Interfaces.IDbContextWrapper<AppDbContext>> _dbContextWrapper;
+        private readonly Mock<Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext>> _dbContextWrapper;
         private readonly Mock<ILogger<ManufacturerService>> _logger;
         private readonly Mock<IMapper> _mapper;
 
         public ManufacturerServiceTests()
         {
             _manufacturerRepository = new Mock<IManufacturerRepository>();
-            _dbContextWrapper = new Mock<Host.Services.Interfaces.IDbContextWrapper<AppDbContext>>();
+            _dbContextWrapper = new Mock<Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext>>();
             _mapper = new Mock<IMapper>();
             _logger = new Mock<ILogger<ManufacturerService>>();
 
