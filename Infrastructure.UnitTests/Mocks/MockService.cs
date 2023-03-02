@@ -11,11 +11,11 @@ public class MockService : BaseDataService<MockDbContext>
 
     public async Task RunWithException()
     {
-        await ExecuteSafeAsync(() => throw new Exception());
+        await ExecuteSafeAsync<bool>(() => throw new Exception());
     }
 
     public async Task RunWithoutException()
     {
-        await ExecuteSafeAsync(() => Task.CompletedTask);
+        await ExecuteSafeAsync<bool>(() => Task.FromResult(true));
     }
 }

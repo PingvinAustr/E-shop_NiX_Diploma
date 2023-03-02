@@ -11,14 +11,14 @@ public class CatalogServiceTests
 
     private readonly Mock<ICarRepository> _catalogItemRepository;
     private readonly Mock<IMapper> _mapper;
-    private readonly Mock<Host.Services.Interfaces.IDbContextWrapper<AppDbContext>> _dbContextWrapper;
+    private readonly Mock<Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext>> _dbContextWrapper;
     private readonly Mock<ILogger<CatalogService>> _logger;
 
     public CatalogServiceTests()
     {
         _catalogItemRepository = new Mock<ICarRepository>();
         _mapper = new Mock<IMapper>();
-        _dbContextWrapper = new Mock<Host.Services.Interfaces.IDbContextWrapper<AppDbContext>>();
+        _dbContextWrapper = new Mock<Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext>>();
         _logger = new Mock<ILogger<CatalogService>>();
 
         var dbContextTransaction = new Mock<IDbContextTransaction>();

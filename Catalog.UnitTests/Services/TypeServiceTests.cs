@@ -10,14 +10,14 @@ namespace Catalog.UnitTests.Services
         private readonly TypeService _typeService;
 
         private readonly Mock<ITypeRepository> _typeRepository;
-        private readonly Mock<Host.Services.Interfaces.IDbContextWrapper<AppDbContext>> _dbContextWrapper;
+        private readonly Mock<Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext>> _dbContextWrapper;
         private readonly Mock<ILogger<TypeService>> _logger;
         private readonly Mock<IMapper> _mapper;
 
         public TypeServiceTests()
         {
             _typeRepository = new Mock<ITypeRepository>();
-            _dbContextWrapper = new Mock<Host.Services.Interfaces.IDbContextWrapper<AppDbContext>>();
+            _dbContextWrapper = new Mock<Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext>>();
             _mapper = new Mock<IMapper>();
             _logger = new Mock<ILogger<TypeService>>();
 
