@@ -8,19 +8,6 @@
     </div>
 </section>
 
-<section class="esh-catalog-filters">
-    <div class="container">
-        <form asp-action="Index" asp-controller="Catalog" method="post">
-            <label class="esh-catalog-label" data-title="brand">
-                <select asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands" class="esh-catalog-filter"></select>
-            </label>
-            <label class="esh-catalog-label" data-title="type">
-                <select asp-for="@Model.TypesFilterApplied" asp-items="@Model.Types" class="esh-catalog-filter"></select>
-            </label>
-            <input class="esh-catalog-send" type="image" src="~/images/arrow-right.svg" />
-        </form>
-    </div>
-</section>
 
 <div class="container">
     <div class="row">
@@ -32,26 +19,107 @@
         </div>
         }
     </div>
-
+    </div>
     @if (Model.CatalogItems.Count() > 0)
     {
-    <partial name="_pagination" for="PaginationInfo" />
-
-    <div class="esh-catalog-items row">
+    <div class="esh-catalog-menu-container">
+   <div class="esh-catalog-sidebar">
+        <div class="sidebar-logo">
+        <img src="http://www.alevelwebsite.com:81/assets/images/logo.png"/>
+         </div>
+        <div style="display: flex; flex-direction: column; width: 200px;">
+            <div class="sidebar-filter-heading">Filters:</div>
+            <form asp-action="Index" asp-controller="Catalog" method="post">
+            <label class="esh-catalog-label" data-title="brand" style="position:relative;">
+                <select asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands" class="esh-catalog-filter"></select>
+                <span style="position:absolute; top:60%; right:10%;" class="arrow down"></span>
+            </label>
+            <label class="esh-catalog-label" data-title="type" style="position:relative;">
+                <select asp-for="@Model.TypesFilterApplied" asp-items="@Model.Types" class="esh-catalog-filter"></select>
+                 <span style="position:absolute; top:60%; right:10%;" class="arrow down"></span>
+            </label>
+            <button class="esh-catalog-send" type="submit">
+                <span>Apply</span>
+                <span class="arrowB rightB"></span>
+            </button>
+        </form>
+        </div>
+    </div>
+    <div class="esh-catalog-items row" style="width:100% !important;">
         @foreach (var catalogItem in Model.CatalogItems)
             {
         <div class="esh-catalog-item col-md-4">
+            <div class="esh-catalog-item-card">
             <partial name="_product" model="catalogItem" />
+            </div>
         </div>
             }
     </div>
-
+    </div>
     <partial name="_pagination" for="PaginationInfo" />
     }
     else
     {
+
+        <div class="esh-catalog-menu-container">
+    <div class="esh-catalog-sidebar">
+        <div class="sidebar-logo">
+        <img src="http://www.alevelwebsite.com:81/assets/images/logo.png"/>
+         </div>
+        <div style="display: flex; flex-direction: column; width: 200px;">
+            <div class="sidebar-filter-heading">Filters:</div>
+            <form asp-action="Index" asp-controller="Catalog" method="post">
+            <label class="esh-catalog-label" data-title="brand" style="position:relative;">
+                <select asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands" class="esh-catalog-filter"></select>
+                <span style="position:absolute; top:60%; right:10%;" class="arrow down"></span>
+            </label>
+            <label class="esh-catalog-label" data-title="type" style="position:relative;">
+                <select asp-for="@Model.TypesFilterApplied" asp-items="@Model.Types" class="esh-catalog-filter"></select>
+                 <span style="position:absolute; top:60%; right:10%;" class="arrow down"></span>
+            </label>
+            <button class="esh-catalog-send" type="submit">
+                <span>Apply</span>
+                <span class="arrowB rightB"></span>
+            </button>
+        </form>
+        </div>
+    </div>
     <div class="esh-catalog-items row">
-        THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
+       <div class="box">
+  <div class="box__ghost">
+    <div class="symbol"></div>
+    <div class="symbol"></div>
+    <div class="symbol"></div>
+    <div class="symbol"></div>
+    <div class="symbol"></div>
+    <div class="symbol"></div>
+    
+    <div class="box__ghost-container">
+      <div class="box__ghost-eyes">
+        <div class="box__eye-left"></div>
+        <div class="box__eye-right"></div>
+      </div>
+      <div class="box__ghost-bottom">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="box__ghost-shadow"></div>
+  </div>
+  
+  <div class="box__description">
+    <div class="box__description-container">
+      <div class="box__description-title">Whoops!</div>
+      <div class="box__description-text">It seems like we couldn't find the request you were looking for</div>
+    </div>
+   
+    
+  </div>
+  
+</div>
+    </div>
     </div>
     }
-</div>

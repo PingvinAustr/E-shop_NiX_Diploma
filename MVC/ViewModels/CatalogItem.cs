@@ -12,9 +12,9 @@ public record CatalogItem
 
     public string ImageFileName { get; set; } = null!;
 
-    public CatalogType CatalogType { get; set; } = null!;
+    public CatalogType CarType { get; set; } = null!;
 
-    public CatalogBrand CatalogBrand { get; set; } = null!;
+    public CatalogBrand Manufacturer { get; set; } = null!;
 
-    public bool isAvaliable { get; set; }
+    public bool IsAvailable { get; set; }
 }

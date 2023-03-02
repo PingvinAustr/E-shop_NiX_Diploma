@@ -66,7 +66,7 @@ namespace Catalog.Host.Data
             new Car() { CarName = "BMW X7 xDrive30d", CarPromo = "Promo", ImageFileName = "7", IsAvailable = true, ManufacturerId = 2, TypeId = 1, Price = 75000 },
             new Car() { CarName = "Ford GT Mk II ", CarPromo = "Promo", ImageFileName = "8", IsAvailable = true, ManufacturerId = 3, TypeId = 2, Price = 300000 },
             new Car() { CarName = "Ford Mustang 1967", CarPromo = "Promo", ImageFileName = "9", IsAvailable = true, ManufacturerId = 3, TypeId = 3, Price = 50000 },
-            new Car() { CarName = "Zaporozhets", CarPromo = "Promo", ImageFileName = "10", IsAvailable = true, ManufacturerId = 5, TypeId = 3, Price = 102000 },
+            new Car() { CarName = "Zaporozhets", CarPromo = "Promo", ImageFileName = "10", IsAvailable = false, ManufacturerId = 5, TypeId = 3, Price = 102000 },
             new Car() { CarName = "LEXUS ES300H", CarPromo = "Promo", ImageFileName = "11", IsAvailable = true, ManufacturerId = 4, TypeId = 4, Price = 55000 },
         };
         }
