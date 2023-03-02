@@ -14,7 +14,7 @@ public class ManufacturerService : BaseDataService<AppDbContext>, IManufacturerS
     private readonly IMapper _mapper;
 
     public ManufacturerService(
-        IDbContextWrapper<AppDbContext> dbContextWrapper,
+        Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext> dbContextWrapper,
         ILogger<BaseDataService<AppDbContext>> logger,
         IManufacturerRepository catalogBrandRepository,
         IMapper mapper)

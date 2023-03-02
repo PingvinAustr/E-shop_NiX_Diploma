@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Catalog.Host.Configurations;
 using Catalog.Host.Data.Entities;
 using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Enums;
@@ -6,26 +7,34 @@ using Catalog.Host.Models.Requests;
 using Catalog.Host.Models.Responses;
 using Catalog.Host.Services.Interfaces;
 using Infrastructure;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Catalog.Host.Controllers;
 
 [ApiController]
+[Authorize(Policy = AuthPolicy.AllowEndUserPolicy)]
 [Route(ComponentDefaults.DefaultRoute)]
 public class CatalogBffController : ControllerBase
 {
     private readonly ILogger<CatalogBffController> _logger;
     private readonly ICatalogService _catalogService;
+    private readonly IOptions<CatalogConfig> _config;
 
     public CatalogBffController(
         ILogger<CatalogBffController> logger,
-        ICatalogService catalogService)
+        ICatalogService catalogService,
+        IOptions<CatalogConfig> config)
     {
         _logger = logger;
         _catalogService = catalogService;
+        _config = config;
     }
 
     [HttpPost]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(PaginatedItemsResponse<CarDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Items(PaginatedItemsRequest<CatalogTypeFilter> request)
     {
@@ -36,9 +45,11 @@ public class CatalogBffController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(PaginatedItemsResponse<ManufacturerDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetManufacturers()
     {
+        _logger.LogInformation($"ABOBAABOBAABOBAABOBAABOBAUser Id {User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value}");
         _logger.LogInformation($"[LOG][{DateTime.Now}] CatalogBffContoller.GetManufacturers - getting all manufacturers");
         var items = await _catalogService.GetManufacturers();
         if (items == null)
@@ -52,6 +63,7 @@ public class CatalogBffController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(PaginatedItemsResponse<TypeDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetTypes()
     {

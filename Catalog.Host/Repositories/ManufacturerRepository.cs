@@ -11,7 +11,7 @@ public class ManufacturerRepository : IManufacturerRepository
     private readonly ILogger<ManufacturerRepository> _logger;
 
     public ManufacturerRepository(
-        IDbContextWrapper<AppDbContext> dbContextWrapper,
+        Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext> dbContextWrapper,
         ILogger<ManufacturerRepository> logger)
     {
         _dbContext = dbContextWrapper.DbContext;

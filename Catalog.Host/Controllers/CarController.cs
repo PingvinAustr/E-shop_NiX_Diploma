@@ -1,15 +1,19 @@
 ﻿using System.Net;
+using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Requests;
 using Catalog.Host.Models.Responses;
+using Catalog.Host.Models.Validators;
 using Catalog.Host.Services.Interfaces;
 using Infrastructure;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Catalog.Host.Models.Dtos;
-using Catalog.Host.Models.Validators;
 
 namespace Catalog.Host.Controllers;
 
 [ApiController]
+[Authorize(Policy = AuthPolicy.AllowClientPolicy)]
+[Scope("catalog.catalogitem")]
 [Route(ComponentDefaults.DefaultRoute)]
 public class CarController : ControllerBase
 {

@@ -12,7 +12,7 @@ namespace Catalog.Host.Repositories
         private readonly ILogger<CarRepository> _logger;
 
         public CarRepository(
-        IDbContextWrapper<AppDbContext> dbContextWrapper,
+        Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext> dbContextWrapper,
         ILogger<CarRepository> logger)
         {
             _dbContext = dbContextWrapper.DbContext;

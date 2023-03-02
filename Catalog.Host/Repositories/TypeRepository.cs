@@ -11,7 +11,7 @@ public class TypeRepository : ITypeRepository
     private readonly ILogger<TypeRepository> _logger;
 
     public TypeRepository(
-        IDbContextWrapper<AppDbContext> dbContextWrapper,
+        Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext> dbContextWrapper,
         ILogger<TypeRepository> logger)
     {
         _dbContext = dbContextWrapper.DbContext;

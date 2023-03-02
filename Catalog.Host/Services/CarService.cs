@@ -13,7 +13,7 @@ namespace Catalog.Host.Services
         private readonly IMapper _mapper;
 
         public CarService(
-            IDbContextWrapper<AppDbContext> dbContextWrapper,
+            Infrastructure.Services.Interfaces.IDbContextWrapper<AppDbContext> dbContextWrapper,
             ILogger<BaseDataService<AppDbContext>> logger,
             ICarRepository catalogItemRepository,
             IMapper mapper)
