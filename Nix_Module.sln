@@ -15,9 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{1188A477-5CE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC", "MVC\MVC.csproj", "{AE00D7D5-0A55-4432-ABA8-B07CF64BE64F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.UnitTests", "Catalog.UnitTests\Catalog.UnitTests.csproj", "{91ABE688-CE73-4B3F-9D99-F0BF99ED5AE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.UnitTests", "Catalog.UnitTests\Catalog.UnitTests.csproj", "{91ABE688-CE73-4B3F-9D99-F0BF99ED5AE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.UnitTests", "Infrastructure.UnitTests\Infrastructure.UnitTests.csproj", "{DB892238-EA6E-4692-8BFB-181F71FCD214}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.UnitTests", "Infrastructure.UnitTests\Infrastructure.UnitTests.csproj", "{DB892238-EA6E-4692-8BFB-181F71FCD214}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IdentityServer\IdentityServer\IdentityServer.csproj", "{F0225B05-964E-4FE3-85C0-D317508E2DBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{DB892238-EA6E-4692-8BFB-181F71FCD214}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB892238-EA6E-4692-8BFB-181F71FCD214}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB892238-EA6E-4692-8BFB-181F71FCD214}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0225B05-964E-4FE3-85C0-D317508E2DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0225B05-964E-4FE3-85C0-D317508E2DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0225B05-964E-4FE3-85C0-D317508E2DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0225B05-964E-4FE3-85C0-D317508E2DBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
