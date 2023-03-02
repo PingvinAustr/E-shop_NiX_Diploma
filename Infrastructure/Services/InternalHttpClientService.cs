@@ -1,32 +1,41 @@
-﻿using IdentityModel.Client;
+using System.Text;
+using IdentityModel.Client;
 using Infrastructure.Configuration;
-using MVC.Services.Interfaces;
+using Infrastructure.Identity;
+using Infrastructure.Services.Interfaces;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-namespace MVC.Services;
+namespace Infrastructure.Services;
 
-public class HttpClientService : IHttpClientService
+public class InternalHttpClientService : IInternalHttpClientService
 {
     private readonly IHttpClientFactory _clientFactory;
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly AuthorizationConfig _authConfig;
+    private readonly ClientConfig _clientConfig;
 
-    public HttpClientService(
+    public InternalHttpClientService(
         IHttpClientFactory clientFactory,
-        IHttpContextAccessor httpContextAccessor)
+        IOptions<ClientConfig> clientConfig,
+        IOptions<AuthorizationConfig> authConfig)
     {
         _clientFactory = clientFactory;
-        _httpContextAccessor = httpContextAccessor;
+        _authConfig = authConfig.Value;
+        _clientConfig = clientConfig.Value;
     }
 
     public async Task<TResponse> SendAsync<TResponse, TRequest>(string url, HttpMethod method, TRequest? content)
     {
         var client = _clientFactory.CreateClient();
+        var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
+            {
+                Address = $"{_authConfig.Authority}/connect/token",
 
-        var token = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
-        if (!string.IsNullOrEmpty(token))
-        {
-            client.SetBearerToken(token);
-        }
+                ClientId = _clientConfig.Id,
+                ClientSecret = _clientConfig.Secret
+            });
+
+        client.SetBearerToken(tokenResponse.AccessToken);
 
         var httpMessage = new HttpRequestMessage();
         httpMessage.RequestUri = new Uri(url);
@@ -47,6 +56,6 @@ public class HttpClientService : IHttpClientService
             return response!;
         }
 
-        return default(TResponse)!;
+        return default(TResponse) !;
     }
 }
