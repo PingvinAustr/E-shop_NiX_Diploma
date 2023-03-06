@@ -1,6 +1,6 @@
-using Basket.Host.Models;
+using Basket.Server.Models;
 
-namespace Basket.Host.Services.Interfaces;
+namespace Basket.Server.Services.Interfaces;
 
 public interface IBasketService
 {

@@ -1,7 +1,7 @@
-using Basket.Host.Models;
-using Basket.Host.Services.Interfaces;
+using Basket.Server.Models;
+using Basket.Server.Services.Interfaces;
 
-namespace Basket.Host.Services;
+namespace Basket.Server.Services;
 
 public class BasketService : IBasketService
 {

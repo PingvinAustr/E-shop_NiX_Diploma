@@ -1,24 +1,29 @@
-using Basket.Host.Configurations;
-using Basket.Host.Services;
-using Basket.Host.Services.Interfaces;
+using Basket.Server.Configurations;
+using Basket.Server.Services;
+using Basket.Server.Services.Interfaces;
 using Infrastructure.Extensions;
 using Infrastructure.Filters;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
+using MVC;
 
 var configuration = GetConfiguration();
 
 var builder = WebApplication.CreateBuilder(args);
 
+/*
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(typeof(HttpGlobalExceptionFilter));
 
 })
     .AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = true);
+*/
 
+builder.Services.AddControllersWithViews();
+builder.AddConfiguration();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -50,16 +55,30 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<AuthorizeCheckOperationFilter>();
 });
 
-builder.AddConfiguration();
+
 builder.Services.Configure<RedisConfig>(
     builder.Configuration.GetSection("Redis"));
-
+builder.Services.Configure<AppSettings>(configuration);
 builder.Services.AddAuthorization(configuration);
+
+
+builder.Services.AddHttpClient();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddTransient<IJsonSerializer, JsonSerializer>();
 builder.Services.AddTransient<IRedisCacheConnectionService, RedisCacheConnectionService>();
 builder.Services.AddTransient<ICacheService, CacheService>();
 builder.Services.AddTransient<IBasketService, BasketService>();
+
+// Add session middleware
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = ".Basket.Sessions";
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = false;
+    options.Cookie.IsEssential = true;
+});
 
 builder.Services.AddCors(options =>
 {
@@ -72,18 +91,11 @@ builder.Services.AddCors(options =>
             .AllowCredentials());
 });
 
-// Add session middleware
-builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(options =>
-{
-    options.Cookie.Name = ".Basket.Session";
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-    options.Cookie.HttpOnly = false;
-    options.Cookie.IsEssential = true;
-});
+
+
 
 var app = builder.Build();
-
+app.UseSession();
 app.UseSwagger()
     .UseSwaggerUI(setup =>
     {
@@ -92,12 +104,14 @@ app.UseSwagger()
         setup.OAuthAppName("Basket Swagger UI");
     });
 
+app.UseStaticFiles();
+app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax });
+
 app.UseRouting();
 app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseSession();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapDefaultControllerRoute();
