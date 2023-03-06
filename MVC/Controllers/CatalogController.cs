@@ -1,6 +1,8 @@
 ﻿using MVC.Services.Interfaces;
+using MVC.ViewModels;
 using MVC.ViewModels.CatalogViewModels;
 using MVC.ViewModels.Pagination;
+using Newtonsoft.Json;
 
 namespace MVC.Controllers;
 
@@ -42,4 +44,21 @@ public class CatalogController : Controller
         vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : "";
         return View(vm);
     }
+
+    [AllowAnonymous]
+    public async Task<IActionResult> GetSelectedCars([FromServices] IHttpClientFactory httpClientFactory)
+    {
+        var client = httpClientFactory.CreateClient();
+        var response = await client.GetAsync("http://www.alevelwebsite.com:5001/api/v1/Selection/GetSelection");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var cars = JsonConvert.DeserializeObject<List<CatalogItem>>(await response.Content.ReadAsStringAsync());
+
+            return View("SelectedCars", cars);
+        }
+
+        return View("Error");
+    }
+
 }

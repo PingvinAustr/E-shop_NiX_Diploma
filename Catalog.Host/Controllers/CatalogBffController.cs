@@ -80,6 +80,7 @@ public class CatalogBffController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(CarDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetById(int id)
     {
