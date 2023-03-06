@@ -16,7 +16,7 @@ public class TypeDtoValidator : AbstractValidator<TypeDto>
             .WithMessage("Type name must not exceed 100 characters");
 
         RuleFor(x => x.TypeDescription)
-            .MaximumLength(250)
-            .WithMessage("Type description must not exceed 250 characters");
+            .MaximumLength(850)
+            .WithMessage("Type description must not exceed 850 characters");
     }
 }

@@ -1,6 +1,6 @@
-﻿using Basket.Host.Configurations;
-using Basket.Host.Services;
-using Basket.Host.Services.Interfaces;
+﻿using Basket.Server.Configurations;
+using Basket.Server.Services;
+using Basket.Server.Services.Interfaces;
 
 namespace Basket.UnitTests.Services
 {

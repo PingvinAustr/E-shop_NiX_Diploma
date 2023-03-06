@@ -33,7 +33,8 @@ namespace IdentityServer
                         new Scope("catalog.catalogitem"),
                         new Scope("catalog.catalogbff"),
                     },
-                }
+                },
+                new ApiResource("basket", "Basket Service"),
             };
         }
 
@@ -48,9 +49,10 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.Code,
                     ClientSecrets = {new Secret("secret".Sha256())},
                     RedirectUris = { $"{configuration["MvcUrl"]}:5001/signin-oidc"},
-                    AllowedScopes = {"openid", "profile", "mvc"},
+                    AllowedScopes = {"openid", "profile", "mvc", "basket"},
                     RequirePkce = true,
-                    RequireConsent = false
+                    RequireConsent = false,
+                    AllowedCorsOrigins = { configuration["MvcUrl"] },
                 },
                 new Client
                 {
@@ -58,7 +60,6 @@ namespace IdentityServer
 
                     // no interactive user, use the clientid/secret for authentication
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-
                     // secret for authentication
                     ClientSecrets =
                     {
@@ -71,18 +72,17 @@ namespace IdentityServer
                     ClientName = "Catalog Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
-
                     RedirectUris = { $"{configuration["CatalogApi"]}/swagger/oauth2-redirect.html" },
                     PostLogoutRedirectUris = { $"{configuration["CatalogApi"]}/swagger/" },
 
                     AllowedScopes =
                     {
-                        "mvc", "catalog.catalogitem", "catalog.catalogbff"
+                        "mvc", "catalog.catalogitem", "catalog.catalogbff", "basket"
                     }
                 },
                 new Client
                 {
-                     ClientId = "basketswaggerui",
+                    ClientId = "basketswaggerui",
                     ClientName = "Basket Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
@@ -92,7 +92,7 @@ namespace IdentityServer
 
                     AllowedScopes =
                     {
-                        "mvc"
+                        "mvc", "basket"
                     }
                 }
             };

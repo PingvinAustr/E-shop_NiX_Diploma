@@ -1,5 +1,5 @@
 ﻿.esh-pager-wrapper {
-  padding-top: 1rem;
+    padding-top:0 !important;
   text-align: center;
 }
 
@@ -17,9 +17,9 @@
   display: inline-block;
 }
 
-.esh-pager-item--navigable:hover {
-  color: #83D01B;
-}
+    .esh-pager-item--navigable:hover {
+        color: #ff7474 !important;
+    }
 
 @media screen and (max-width: 1280px) {
   .esh-pager-item {

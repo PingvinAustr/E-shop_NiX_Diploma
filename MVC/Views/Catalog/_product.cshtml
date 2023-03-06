@@ -1,18 +1,127 @@
 ﻿@model CatalogItem
+@{
+    // Random post publish date
+    var daysOfWeek = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+    var randomDay = daysOfWeek[new Random().Next(daysOfWeek.Length)];
+    var randomHour = new Random().Next(0, 23);
+    var randomMinute = new Random().Next(0, 59);
+    var timeOfDay = randomHour >= 12 ? "PM" : "AM";
+    if (randomHour == 0)
+    {
+        randomHour = 12;
+    }
+    else if (randomHour > 12)
+    {
+        randomHour -= 12;
+    }
 
+    // Flags
+    string basePath = "http://www.alevelwebsite.com:81/assets/images/";
+    switch (Model.Manufacturer.ManufacturerCountry)
+    {
+        case "USA":
+            {
+                basePath += "us.svg";
+                break;
+            }
+        case "Ukraine":
+            {
+                basePath += "ua.svg";
+                break;
+            }
+        case "Japan":
+            {
+                basePath += "jp.svg";
+                break;
+            }
+        case "Germany":
+            {
+                basePath += "de.svg";
+                break;
+            }
+    }
+    // Button status
+    bool isAvailable = false;
+    if (Model.IsAvailable)
+    {
+        isAvailable = true;
+    }
+
+    // If current auto in cart?
+    bool isInCart = false;
+    string jsonString = Context.Session.GetString("productsSelection");
+    if (!string.IsNullOrEmpty(jsonString))
+    {
+         List<int> carCartIds = Newtonsoft.Json.JsonConvert.DeserializeObject<List<int>>(jsonString);
+            if (carCartIds.Contains(Model.CarId)) isInCart = true;
+    }
+           
+}
 
 <form>
     @{
-        var address = Model.ImageFileName + ".jpg";
-        // address = "http://www.alevelwebsite.com:5001/assets/images/6.png";
+                var address = Model.ImageFileName + ".jpg";
     }
-    <img style="width:350px; height:234px;" class="esh-catalog-thumbnail" src="@address" />
-    <div class="esh-catalog-name">
-        <span>@Model.CarName</span>
-        <span>@Model.CarPromo</span>
+
+
+    <div class="product-card-inner-wrapper">
+    <div class="product-title-block">
+        <span class="product-title-day-time-wrapper"><span class="product-title-day-span">@randomDay, </span><span class="product-title-time-span">@randomHour:@(randomMinute < 10 ? "0" + randomMinute : randomMinute) @timeOfDay</span></span>
+        <span class="esh-catalog-product-name">@Model.CarName</span>
     </div>
-    <div class="esh-catalog-price">
+    <div style="position:relative;">
+    <img class="product-image" src="@address" />
+    <img class="country-image" src="@basePath">
+    </div>
+    <div class="product-card-info-div" style="margin-top:25px;"><span class="product-card-info-span">Type:</span> @Model.CarType.TypeName </div>
+    <div class="product-card-info-div"><span class="product-card-info-span">Manufacturer:</span> @Model.Manufacturer.ManufacturerName </div>
+    <div class="esh-catalog-price" style="text-align:left; margin-top:10px;">
         <span>@Model.Price.ToString("N2")</span>
+        <span>@Model.CarId</span>
     </div>
-    <input type="hidden" asp-for="@Model.Id" name="id" />
+        @{
+            if (!User.Identity.IsAuthenticated)
+            {
+            if (isAvailable)
+            {
+                     <div class="product-buy-button" id="buy-button" data-id="-1">
+                     Buy!
+
+                         <span class="tooltip">Please login to buy the product</span>
+                     </div>
+            }
+            else
+            {
+                    <div class="product-buy-button button-blocked" data-id="-1">
+                     Out of stock...
+                    </div>
+                }
+            }
+            else
+            {
+                if (isAvailable && !isInCart)
+                {
+
+                     <div class="product-buy-button" id="buy-button" data-id="@Model.CarId">
+                     Buy!
+
+                     </div>
+                }
+            else if (!isAvailable)
+            {
+                    <div class="product-buy-button button-blocked" data-id="-1">
+                     Out of stock...
+                    </div>
+                }
+                else if (isAvailable && isInCart)
+                {
+                    <div class="product-added-button" id="buy-button" data-id="-1">
+                     Added
+                     </div>
+                }
+            }
+        }
+    <input type="hidden" asp-for="@Model.CarId" name="id" />
+    </div>
 </form>
+

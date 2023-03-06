@@ -4,15 +4,19 @@ using Basket.Host.Services.Interfaces;
 using Infrastructure.Extensions;
 using Infrastructure.Filters;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 var configuration = GetConfiguration();
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(options =>
-    {
-        options.Filters.Add(typeof(HttpGlobalExceptionFilter));
-    })
+{
+    options.Filters.Add(typeof(HttpGlobalExceptionFilter));
+
+})
     .AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = true);
 
 builder.Services.AddSwaggerGen(options =>
@@ -36,7 +40,8 @@ builder.Services.AddSwaggerGen(options =>
                 TokenUrl = new Uri($"{authority}/connect/token"),
                 Scopes = new Dictionary<string, string>()
                 {
-                    { "mvc", "website" },
+                   // { "mvc", "website" },
+                    { "basket", "Basket API" },
                 }
             }
         }
@@ -67,6 +72,16 @@ builder.Services.AddCors(options =>
             .AllowCredentials());
 });
 
+// Add session middleware
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = ".Basket.Session";
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = false;
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 app.UseSwagger()
@@ -82,7 +97,7 @@ app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseSession();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapDefaultControllerRoute();

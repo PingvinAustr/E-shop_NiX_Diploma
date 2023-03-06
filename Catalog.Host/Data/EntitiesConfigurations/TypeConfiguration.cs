@@ -22,7 +22,7 @@ namespace Catalog.Host.Data.EntitiesConfigurations
 
             builder.Property(x => x.TypeDescription)
                 .IsRequired()
-                .HasMaxLength(250);
+                .HasMaxLength(850);
         }
     }
 }

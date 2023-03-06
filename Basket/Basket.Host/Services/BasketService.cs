@@ -12,7 +12,7 @@ public class BasketService : IBasketService
         _cacheService = cacheService;
     }
     
-    public async Task TestAdd(string userId, string data)
+    public async Task AddProduct(string userId, CarAddRequest data)
     {
        await _cacheService.AddOrUpdateAsync(userId, data);
     }
