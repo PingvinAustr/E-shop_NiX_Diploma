@@ -100,6 +100,33 @@ $(document).mousemove(function( event ) {
 });
 
 </script>
+<script>
+$(document).ready(function () {
+  $('.product-buy-button').click(function () {
+    var id = $(this).data('id');
+    if (id!="-1"){
+         var button = $(this);
+    $.ajax({
+      url: 'http://www.alevelwebsite.com:5001/api/v1/Selection/AddItemToSelection/?id='+id+"&mode=true",
+      type: 'POST',
+      contentType: 'application/json',
+      success: function () {
+          button.removeClass('product-buy-button').addClass('product-added-button').text('Added');
+          button.off('mouseenter mouseleave');
+          $('.esh-cart').css('opacity', '100%');
+      },
+      error: function () {
+        alert('Failed to add product to basket.');
+      }
+    });
+    }
+  });
+});
 
+
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

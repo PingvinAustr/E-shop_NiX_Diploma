@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/order-styles.css">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="/css/app.component.css" />
+    <link rel="stylesheet" href="/css/shared/components/header/header.css" />
+    <link rel="stylesheet" href="/css/shared/components/pager/pager.css" />
+    <link rel="stylesheet" href="/css/catalog/catalog.component.css" />
+    <link rel="stylesheet" href="/css/override.css" type="text/css" />
+    <link rel="stylesheet" href="/css/site.min.css" type="text/css" />
+    <title>Order</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Your order</h1>
+        <div id="preloader">
+            <img id="preloader-img" src="http://www.alevelwebsite.com:81/assets/images/spinner.gif" />
+        </div>
+        <div class="order-general-info">
+            <div class="order-general-info-side">
+                <div class="order-info-line"><span class="order-info-line-span">Order ID:</span><span class="order-info-line-data" id="order-id"></span></div>
+                <div class="order-info-line"><span class="order-info-line-span">Order date:</span><span class="order-info-line-data" id="order-date"></span></div>
+                <div class="order-info-line"><span class="order-info-line-span">Order count:</span><span class="order-info-line-data" id="order-count"></span></div>
+                <div class="order-info-line"><span class="order-info-line-span">Total price:</span> $<span class="order-info-line-data" id="order-price"></span></div>
+            </div>
+            <div class="order-general-info-side">
+                <div class="order-info-line"><span class="order-info-line-span">First name:</span><span id="name" class="order-info-line-data"></span></div>
+                <div class="order-info-line"><span class="order-info-line-span">Last name:</span><span class="order-info-line-data" id="surname"></span></div>
+            </div>
+        </div>
+
+        <div id="car-container">
+        </div>
+        <h2 style="align-self:flex-start; padding-left:35px;">Your cars:</h2>
+        <div id="accordion"></div>
+    </div>
+    <script src="js/orderScript.js"></script>
+</body>
+</html>

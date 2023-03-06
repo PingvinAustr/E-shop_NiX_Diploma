@@ -10,10 +10,9 @@
                 <section class="esh-identity-section">
 
                     <div class="esh-identity-name">@UserManager.Parse(User).Name</div>
-                    <img class="esh-identity-image" src="~/images/arrow-down.png">
                 </section>
 
-                <section class="esh-identity-drop">
+                <section class="esh-identity-drop" style="background:#f0ecec;">
                     
                     <a class="esh-identity-item"
                        href="javascript:document.getElementById('logoutForm').submit()">
@@ -24,6 +23,18 @@
                 </section>
             </form>
         </div>
+
+                    
+                    @{
+                        if (!string.IsNullOrEmpty(Context.Session.GetString("productsSelection"))){
+                <div class="esh-cart" style="opacity:100%;"><a href="~/Cart.html"><img src="~/images/cart.png"/></a></div>
+            }
+            else
+            {
+                <div class="esh-cart"><a href="~/Cart.html"><img src="~/images/cart.png"/></a></div>
+            }
+        }
+
     </section>
 }
 else
@@ -45,3 +56,17 @@ else
 
     </section>
 }
+
+<style>
+    .esh-cart{
+    opacity:0%;
+    width: fit-content;
+    position: absolute;
+    top: 5%;
+    right: -40%;
+    transition:1s;
+    }
+    .esh-identity-name:hover{
+        color:#ff7474;
+    }
+</style>

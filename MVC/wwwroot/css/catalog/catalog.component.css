@@ -42,6 +42,31 @@ html {
     justify-content:center;
 }
 
+.tooltip {
+    cursor:not-allowed;
+    font-weight:500;
+    width: 300px;
+    position: absolute;
+    top: 86%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff7474;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: #fff;
+    padding: 5px 10px;
+    height: 45px;
+    border-radius: 5px;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+}
+
+.product-buy-button:hover .tooltip {
+    opacity: 1;
+}
+
     .esh-catalog-item-card:hover{
         transform:scale(1.05);
     }
@@ -63,21 +88,39 @@ html {
     border-radius:5px;
 }
 
+
+.product-added-button {
+    margin-top: 15px;
+    border: 2px solid transparent;
+    width: 100%;
+    height: 45px;
+    background: green;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    cursor: not-allowed;
+    transition: .5s;
+}
+
 .product-buy-button {
-    margin-top:15px;
-    border:2px solid transparent;   
+    margin-top: 15px;
+    border: 2px solid transparent;
     width: 100%;
     height: 45px;
     background: #ff7474;
-    border-radius:5px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-    transition:.5s;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .5s;
 }
+
     .product-buy-button:hover {
         color: #ff7474;
         background:white;

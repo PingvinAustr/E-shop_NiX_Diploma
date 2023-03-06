@@ -7,7 +7,28 @@
     <div class="container">
     </div>
 </section>
-
+@{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("AAA");
+    Console.WriteLine("AAA");
+    Console.WriteLine("AAA");
+    Console.WriteLine("AAA");
+    Console.WriteLine("AAA");
+    Console.WriteLine(User.Identity.IsAuthenticated);
+    var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+    foreach (var item in User.Claims)
+    {
+        Console.WriteLine(item.Type);
+    }
+    Console.WriteLine($"[{basketId}]");
+    var scopeClaim = User.FindFirst("scope");
+    if (scopeClaim != null)
+    {
+        var scopes = scopeClaim.Value.Split(' ');
+        Console.WriteLine("Scoper " + scopes);
+    }
+    Console.ForegroundColor = ConsoleColor.White;
+}
 
 <div class="container">
     <div class="row">
